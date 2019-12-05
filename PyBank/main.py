@@ -8,8 +8,7 @@ csvOutPath = os.path.join('..', 'outputs', outputFileName)
 
 monthCount = 0
 total = 0.0
-avgChange = 0
-curChange = 0.0
+sumChange = 0
 maxIncrease = 0.0
 maxIncrMnth =''
 maxDecrease = 0.0
@@ -28,7 +27,7 @@ with open(csvInPath) as f:
 		total=  float(x[1]) + total
 		if monthCount > 1:
 			change = float(x[1]) - hold #compare to previous period for current period change
-			avgChange = change/monthCount
+			sumChange = sumChange + change
 		if change > maxIncrease:
 			maxIncrease = change
 			maxIncrMnth = x[0]
@@ -43,7 +42,7 @@ print('Financial Analysis')
 print('------------------')
 print(f'Total Months: {monthCount}')
 print(f'Total: ${int(total)}')
-print(f'Average  Change: ${avgChange}')
+print(f'Average  Change: ${round((sumChange/monthCount),2)}')
 print(f'Greatest Increase in Profits: {maxIncrMnth} (${int(maxIncrease)})')
 print(f'Greatest Decrease in Profits: {maxDecrMnth} (${int(maxDecrease)})')
 
@@ -56,7 +55,13 @@ with open(csvOutPath, 'w', newline='') as t:
     csvwriter.writerow(['------------------'])
     csvwriter.writerow([f'Total Months:', monthCount]) #i want values after delim 
     csvwriter.writerow([f'Total:$', int(total)])
-    csvwriter.writerow([f'Average  Change: $', avgChange])
+    csvwriter.writerow([f'Average  Change: $', round((sumChange/monthCount),2)])
+    csvwriter.writerow([f'Greatest Increase in Profits:', maxIncrMnth ,int(maxIncrease)])
+    csvwriter.writerow([f'Greatest Decrease in Profits:', maxDecrMnth ,int(maxDecrease)])
+    
+
+    
+
 
 
 
