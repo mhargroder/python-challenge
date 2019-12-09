@@ -5,7 +5,6 @@ inputFileName = '02-Homework_03-Python_Instructions_PyBank_Resources_budget_data
 outputFileName = 'FinancialAnalysis.csv'
 csvInPath = os.path.join('..', 'inputs', inputFileName)
 csvOutPath = os.path.join('..', 'outputs', outputFileName)
-
 monthCount = 0
 total = 0.0
 sumChange = 0
@@ -15,7 +14,6 @@ maxDecrease = 0.0
 maxDecrMnth =''
 hold =0.0 # used to hold the prior period value
 change =0.0
-
 
 with open(csvInPath) as f:
 	csvreader = csv.reader(f, delimiter=',')
@@ -45,8 +43,6 @@ print(f'Total: ${int(total)}')
 print(f'Average  Change: ${round((sumChange/monthCount),2)}')
 print(f'Greatest Increase in Profits: {maxIncrMnth} (${int(maxIncrease)})')
 print(f'Greatest Decrease in Profits: {maxDecrMnth} (${int(maxDecrease)})')
-
-
 
 # Output to file 
 with open(csvOutPath, 'w', newline='') as t:
